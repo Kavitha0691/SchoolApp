@@ -46,7 +46,6 @@ export const EditPost = async ({ postId, userdata }: { postId: number, userdata:
 
    if(error) throw error
    revalidatePath("/")
-   // redirect(`${updatedPost.slug}`)
-    redirect("/")
+   redirect(`/${updatedPost.slug}`) 
 
 }
