@@ -10,7 +10,11 @@ const DeleteButton = ({postId}:{postId: number}) => {
         onMutate: () => toast("Deleting your post"),
         onSettled: () => toast.success("post deleted")
     })
-    return <button onClick={ () => mutate(postId)} className="button-teritary">Delete Post</button>
+    return <button onClick={ () => mutate(postId)} className="button-teritary px-4 py-2 
+        lg:px-8
+        w-full 
+        sm:w-auto 
+        text-center">Delete</button>
                      
 }
 

@@ -7,8 +7,8 @@ const MainLayout = ({
 }>) => {
     return (
         <>
-           <Header /> 
-           {children}
+            <Header />
+            {children}
         </>
     )
 }

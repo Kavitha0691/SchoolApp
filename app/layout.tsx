@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/component/Header";
 import { QueryClientProvider } from "@/providers/query-client-provider";
 import { Toaster } from "sonner";
+import Footer from "@/component/Footer";
 // import { QueryClientProvider } from "@tanstack/react-query";
 // import { QueryClientProvider } from "@tanstack/react-query";
 
@@ -30,11 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` p-8 ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Toaster richColors />
         <QueryClientProvider>
-        {children}
+          {children}
+          <Footer />
         </QueryClientProvider>
       </body>
     </html>

@@ -5,7 +5,7 @@ box-sizing: border-box;
 }
 
 @layer components {
-    .button-primary {@apply bg-red-500 text-white rounded-2xl font-bold text-2xl p-2 px-8 py-4}
-    .button-secondary {@apply bg-red-500 text-white rounded-2xl font-bold text-xl p-2 }
-    .button-teritary {@apply  bg-gray-800 text-white rounded-2xl font-bold text-xl p-2 }
+    .button-primary {@apply bg-red-800  text-white rounded-2xl font-bold text-2xl p-2 px-8 py-4}
+    .button-secondary {@apply bg-red-800  text-white rounded-2xl font-bold text-xl p-2 }
+    .button-teritary {@apply  bg-black  text-white rounded-2xl font-bold text-xl p-2 }
 }

@@ -9,43 +9,43 @@ import { redirect } from "next/navigation";
 import { uploadImage } from "@/utils/supabase/upload-image";
 
 
-export const EditPost = async ({ postId, userdata }: { postId: number, userdata: z.infer<typeof postSchema>}) => {
-    console.log("Image param", userdata.image, "type", typeof userdata.image)
-    const parsedData = postSchema.parse(userdata)
-     const imageFile = userdata.image?.get("image")
+export const EditPost = async ({ postId, userdata }: { postId: number, userdata: z.infer<typeof postSchema> }) => {
+  console.log("Image param", userdata.image, "type", typeof userdata.image)
+  const parsedData = postSchema.parse(userdata)
+  const imageFile = userdata.image?.get("image")
 
-     console.log("Image file", imageFile, "type", typeof imageFile) 
-     
-     let publicImageUrl;
+  console.log("Image file", imageFile, "type", typeof imageFile)
 
-       if ((typeof imageFile !== 'string') && imageFile !== undefined) {
-          if(!(imageFile instanceof File) && imageFile !== null) {
-            throw new Error("Malformed image file")
-        }
+  let publicImageUrl;
 
-        publicImageUrl = await uploadImage(imageFile!);
+  if ((typeof imageFile !== 'string') && imageFile !== undefined) {
+    if (!(imageFile instanceof File) && imageFile !== null) {
+      throw new Error("Malformed image file")
+    }
 
-       } else {
-        publicImageUrl = imageFile
-       }
+    publicImageUrl = await uploadImage(imageFile!);
 
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
+  } else {
+    publicImageUrl = imageFile
+  }
 
-    const { data: post, error } = await supabase.from('posts').select('*').eq('id', postId).single()
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
 
-    if (!user || user.id !== post?.user_id) throw new Error("Not Authorised");
+  const { data: post, error } = await supabase.from('posts').select('*').eq('id', postId).single()
 
-    const { data: updatedPost } =
-        await supabase.from('posts')
-            .update({ ...parsedData, image: publicImageUrl, slug: slugify(parsedData.title)})
-            .eq('id', postId)
-            .select('slug')
-            .single()
-            .throwOnError()
+  if (!user || user.id !== post?.user_id) throw new Error("Not Authorised");
 
-   if(error) throw error
-   revalidatePath("/")
-   redirect(`/${updatedPost.slug}`) 
+  const { data: updatedPost } =
+    await supabase.from('posts')
+      .update({ ...parsedData, image: publicImageUrl, slug: slugify(parsedData.title) })
+      .eq('id', postId)
+      .select('slug')
+      .single()
+      .throwOnError()
+
+  if (error) throw error
+  revalidatePath("/")
+  redirect(`/${updatedPost.slug}`)
 
 }

@@ -21,9 +21,9 @@ export const middleware = async (request: NextRequest) => {
         }
     )
 
-    const {data: {user}, error} = await supabase.auth.getUser()
-    
-    const protectedRoutes = [ 
+    const { data: { user }, error } = await supabase.auth.getUser()
+
+    const protectedRoutes = [
         /^\/create$/,
         /^\/[^\/]+\/edit$/
     ]

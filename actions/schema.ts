@@ -12,9 +12,17 @@ export const signUpSchema = z.object({
 })
 
 export const postSchema = z.object({
-      title:z.string().min(3, "Titles must have at least 3 characters"),
+      title: z.string().min(3, "Titles must have at least 3 characters"),
       content: z.string().optional(),
       image: z.instanceof(FormData).optional()
 
 })
+
+export const commentSchema = z.object({
+      content: z
+            .string()
+            .min(1, "Comment cannot be empty")
+            .max(1000, "Comment is too long"),
+      postId: z.number()
+});
 
