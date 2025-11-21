@@ -13,7 +13,8 @@ const DeleteComment = async (commentId: number) => {
 
     if (!user) {
       console.error("Delete comment error: Not Authorized");
-      return { error: "Not Authorized" };
+      throw new Error("Not Authorized");
+
     }
 
     const { data: comment } = await supabase
